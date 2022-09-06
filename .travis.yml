@@ -25,11 +25,11 @@ script:
   - docker tag udagram-api-feed henrynguyen17/udagram-api-feed:v1
   - docker tag udagram-api-user henrynguyen17/udagram-api-user:v1
   - docker tag udagram-api-frontend henrynguyen17/udagram-frontend:v1
-  - docker tag reverseproxy henrynguyen17/udagram-reverseproxy:v1
+  - docker tag reverseproxy henrynguyen17/reverseproxy:v1
     
 # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
 after_success:  
   - docker push henrynguyen17/udagram-api-feed:v1
   - docker push henrynguyen17/udagram-api-user:v1   
   - docker push henrynguyen17/udagram-frontend:v1
-  - docker push henrynguyen17/udagram-reverseproxy:v1
+  - docker push henrynguyen17/reverseproxy:v1
