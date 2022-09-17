@@ -5,7 +5,7 @@ metadata:
     service: backend-feed
   name: backend-feed
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: backend-feed
@@ -14,19 +14,19 @@ spec:
       labels:
         service: backend-feed
     spec:
+      serviceAccountName: default-sa
       containers:
         - image: henrynguyen17/udagram-api-feed:v1
-          name: udagram-api-feed
-          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+          name: backend-feed
           resources:
             requests:
               memory: "64Mi"
               cpu: "250m"
             limits:
               memory: "1024Mi"
-              cpu: "500m" 
-          ports:
-            - containerPort: 8080
+              cpu: "500m"
           env:
             - name: URL
               valueFrom:
@@ -63,18 +63,20 @@ spec:
                 configMapKeyRef:
                   name: env-config
                   key: POSTGRES_HOST
-            - name: POSTGRES_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: env-secret
-                  key: POSTGRES_USERNAME
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: env-secret
                   key: POSTGRES_PASSWORD
-
-      restartPolicy: Always
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: POSTGRES_USERNAME
+          volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws/"
+              readOnly: true
       volumes:
         - name: aws-secret
           secret:
