@@ -1,0 +1,36 @@
+docker login --username=henrynguyen17
+hoangchuai
+
+aws eks update-kubeconfig --region us-east-1 --name MyEKSCluster
+MyNodeGroup
+
+kubectl get nodes
+kubectl get deployments
+kubectl get services
+kubectl get pods
+
+
+# Apply env variables and secrets
+kubectl apply -f aws-secret.yaml
+kubectl apply -f env-secret.yaml
+kubectl apply -f env-configmap.yaml
+
+# Deployments - Double check the Dockerhub image name and version in the deployment files
+kubectl apply -f backend-feed-deployment.yaml
+kubectl apply -f backend-user-deployment.yaml
+kubectl apply -f frontend-deployment.yaml
+kubectl apply -f reverseproxy-deployment.yaml
+
+# Service
+kubectl apply -f backend-feed-service.yaml
+kubectl apply -f backend-user-service.yaml
+kubectl apply -f frontend-service.yaml
+kubectl apply -f reverseproxy-service.yaml
+
+kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend --port=80
+kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy
+
+docker build . -t henrynguyen17/udagram-frontend:v2
+docker push henrynguyen17/udagram-frontend:v2
+docker pull henrynguyen17/udagram-api-feed:v1
+kubectl set image deployment frontend frontend=henrynguyen17/udagram-frontend:v2
