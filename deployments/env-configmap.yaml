@@ -7,6 +7,6 @@ data:
   AWS_REGION: us-east-1
   AWS_PROFILE: nd9990
   JWT_SECRET: hello
-  URL: http://af1101b74b1ee4fcba163142d17f2d4a-1761373774.us-east-1.elb.amazonaws.com:8100
+  URL: http://a13aa82735fe34614856925a3ab25a7a-104307015.us-east-1.elb.amazonaws.com:8100
 metadata:
   name: env-config
