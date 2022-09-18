@@ -16,7 +16,7 @@ spec:
     spec:
       serviceAccountName: default-sa
       containers:
-        - image: henrynguyen17/udagram-reverseproxy:v1
+        - image: henrynguyen17/udagram-reverseproxy:v2
           name: reverseproxy
           resources:
             requests:
@@ -26,4 +26,4 @@ spec:
               memory: "1024Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8001
+            - containerPort: 8080
