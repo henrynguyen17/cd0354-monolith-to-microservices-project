@@ -13,18 +13,13 @@ spec:
     metadata:
       labels:
         service: frontend
-        api: external
+        api: external        
     spec:
-      serviceAccountName: default-sa
       containers:
-        - image: henrynguyen17/udagram-frontend:v1
-          name: frontend
-          ports:
-            - containerPort: 80
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
+      - image: henrynguyen17/udagram-frontend:v1
+        name: frontend       
+        ports:
+        - containerPort: 8100  
+        
+                   
+      

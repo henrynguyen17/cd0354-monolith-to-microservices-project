@@ -14,16 +14,10 @@ spec:
       labels:
         service: reverseproxy
     spec:
-      serviceAccountName: default-sa
       containers:
-        - image: henrynguyen17/udagram-reverseproxy:v1
-          name: reverseproxy
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 8001
+      - image: henrynguyen17/udagram-reverseproxy:v1
+        name: reverseproxy               
+        ports:
+        - containerPort: 8180
+      restartPolicy: Always
+      
