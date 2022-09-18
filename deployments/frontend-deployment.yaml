@@ -20,7 +20,7 @@ spec:
         - image: henrynguyen17/udagram-frontend:v1
           name: frontend
           ports:
-            - containerPort: 8100
+            - containerPort: 80
           resources:
             requests:
               memory: "64Mi"
