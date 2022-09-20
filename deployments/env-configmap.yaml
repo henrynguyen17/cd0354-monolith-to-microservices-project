@@ -8,5 +8,5 @@ data:
   AWS_REGION: us-east-1
   JWT_SECRET: hello
   POSTGRES_DB: postgres
-  POSTGRES_HOST: cdr.ce9gwzskiowu.us-east-1.rds.amazonaws.com
+  POSTGRES_HOST: database-1.ce9gwzskiowu.us-east-1.rds.amazonaws.com
   URL: http://ac90c2e3b81594186b8e7877f70d9e57-563289846.us-east-1.elb.amazonaws.com:8100
