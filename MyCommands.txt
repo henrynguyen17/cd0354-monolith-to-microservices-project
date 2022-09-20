@@ -12,6 +12,7 @@ kubectl get deployments
 kubectl get services
 kubectl get pods
 
+#enable RDS
 
 # Apply env variables and secrets
 kubectl apply -f aws-secret.yaml
