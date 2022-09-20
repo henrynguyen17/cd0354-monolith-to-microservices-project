@@ -4,10 +4,10 @@ metadata:
   labels:
     service: reverseproxy
   name: reverseproxy
-spec:
+spec:  
   ports:
-  - protocol: TCP
-    port: 8180
-    targetPort: 8180
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
   selector:
     service: reverseproxy
