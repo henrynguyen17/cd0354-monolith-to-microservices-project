@@ -9,7 +9,8 @@ kubectl get nodes
 
 #4 enable RDS Db
 
-#5.0 all Travis deployment tags are v1
+#5.0.1 all Travis deployment tags are v1.
+#5.0.2 all v1 docker images must be create on hub first.
 
 #5.1 Apply Secrets
 kubectl apply -f aws-secret.yaml
@@ -44,16 +45,27 @@ kubectl get services
 #5.7 Apply the last config
 kubectl apply -f env-configmap.yaml
 
-#5.8 update docker FE to v2
+#5.8.1 For docker login if needing (then typing password)
+docker login --username=henrynguyen17
+
+#5.8.2 update docker FE to v2
 docker build . -t henrynguyen17/udagram-frontend:v2
 docker push henrynguyen17/udagram-frontend:v2
 kubectl set image deployment frontend frontend=henrynguyen17/udagram-frontend:v2
 
 #5.9 Travis FE deployment tag is v2 and commit code.
 
+#6.0 Complete scaling
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl autoscale deployment backend-feed --cpu-percent=70 --min=1 --max=10
+kubectl autoscale deployment backend-user --cpu-percent=70 --min=1 --max=10
+kubectl get hpa
+kubectl describe hpa
+
+
 #Notes:
-#1. For docker login if needing (then typing password)
-docker login --username=henrynguyen17
+#1. if pod has bad status you can rerun
+kubectl rollout restart deployment <deployment_name> -n <namespace>
 
 #2. Delete cluster when finishing
 eksctl delete cluster -f setup-cluster.yaml --profile Admin
